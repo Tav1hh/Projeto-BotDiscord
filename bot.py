@@ -1293,14 +1293,8 @@ def bot_model(bnome,token):
             async with message.channel.typing():
                 sleep(2)
             await rsp(choice(respostas))
-    
-    #Sair de Servidores
-    #Multiversal Comunity
-    #await bot.get_guild(1207138662245204018).leave()    
-
-    #Oopa Mine
-    #await bot.get_guild(1214774816662626334).leave()
-    
+            
+            
     bot.run(token)
-bot_model('Nome do BOT','Token Do BOT')
+# bot_model('Nome do BOT','Token Do BOT')
 
