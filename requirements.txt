@@ -1,0 +1,6 @@
+discord.py
+pytube
+mysql.connector
+pathlib
+ffmpeg
+pynacl
