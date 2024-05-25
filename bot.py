@@ -1194,13 +1194,7 @@ def bot_model(bnome,token):
             #Simula que está digitando
             async with message.channel.typing():
                 sleep(1)
-            await rsp(file=picture)
-        elif msg(f'{bnome} volt'):
-            respostas = ['Eu nunca fui embora man😎','Eu sou Atemporal Mlk🗿','Eu sou como fenix, sempre volto😎','Eu não conseguiria ficar longe de vocês!','']
-            #Simula que está digitando
-            async with message.channel.typing():
-                sleep(2)
-            await rsp(choice(respostas))
+            await rsp(file=picture)      
         elif msg(bnome):
             #Simula que está digitando
             async with message.channel.typing():
