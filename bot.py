@@ -124,8 +124,8 @@ def bot_model(bnome,token):
             mycursor.execute(sql)
             mydb.commit()
     #Slash Commands
-    #Comandos ADM
     
+    #Comandos ADM
     @bot.tree.command(name='clear',description='Limpa um determinado número de mensagens do Chat')
     @app_commands.describe(quantidade = 'quantas mensagens eu devo apagar?')
     async def clear(ctx:discord.Interaction, quantidade:int = 10):
@@ -1283,5 +1283,5 @@ def bot_model(bnome,token):
             
             
     bot.run(token)
-# bot_model('Nome do BOT','Token Do BOT')
+bot_model('Nome do BOT','Token Do BOT')
 
