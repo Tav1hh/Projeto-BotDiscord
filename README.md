@@ -22,3 +22,4 @@ server_name varchar(30),
 status varchar(10));
 
 Após Criar essas duas tabelas configure a conexão com seu banco de dados na linha 30 do arquivo bot.py
+na ultima linha do bot.py Coloque o nome do seu Bot e o Token dele, Pronto! so iniciar o arquivo agora..
