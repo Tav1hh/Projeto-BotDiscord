@@ -27,13 +27,6 @@ def bot_model(bnome,token):
         except Exception as e:
             print(e)
     
-    # #Coneção com banco de dados
-    # mydb = mysql.connector.connect(
-    # host="maq.lotuslab.tech",
-    # user="u4_OlzX53Mgm7",
-    # password="VzFlXZ2cg1Am9ppr^V2df^U+",
-    # database="s4_oopa")
-    # mycursor = mydb.cursor()
     #Coneção com banco de dados
     mydb = mysql.connector.connect(
     host="localhost",
