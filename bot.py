@@ -952,7 +952,7 @@ def bot_model(bnome,token):
                 return
             video_url = YouTube(video_link)
             video_name = YouTube(video_link).title.replace('.','').replace('#','').replace('?','').replace('"','').replace('|','')
-            folder = "Oopa/midia/downloads"
+            folder = "midia/downloads"
             #Baixando o Arquivo de video
             await ctx.response.send_message("Baixando..")
             video_url.streams.get_highest_resolution().download(folder)
