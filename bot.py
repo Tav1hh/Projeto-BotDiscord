@@ -1283,5 +1283,5 @@ def bot_model(bnome,token):
             
             
     bot.run(token)
-bot_model('Nome do BOT','Token Do BOT')
+# bot_model('Nome do BOT','Token Do BOT')
 
