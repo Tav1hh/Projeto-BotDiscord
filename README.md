@@ -21,5 +21,40 @@ server_id varchar(25),
 server_name varchar(30),
 status varchar(10));
 
-Após Criar essas duas tabelas configure a conexão com seu banco de dados na linha 30 do arquivo bot.py
+Após Criar essas duas tabelas configure a conexão com seu banco de dados na linha 30 do arquivo bot.py,
 na ultima linha do bot.py Coloque o nome do seu Bot e o Token dele, Pronto! so iniciar o arquivo agora..
+
+Lista de Comandos do Bot
+
+#Comandos de Moderação
+Clear
+Bot-off
+Bot-on
+add_adm
+remove_adm
+adm_list
+add_ignore
+remove_ignore
+ignore_list
+cargo-add
+cargo-remove
+
+#Comandos do Banco
+banco-saldo
+banco-transferir
+banco-depositar
+banco-sacar
+banco-trabalhar
+banco-roubar
+banco-apostar
+banco-top-local
+loja
+
+#Comandos Oopa
+fale
+link
+pvp
+beijar
+avatar
+video-link
+gay
