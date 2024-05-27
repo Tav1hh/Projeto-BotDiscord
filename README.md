@@ -31,7 +31,7 @@ na ultima linha do bot.py coloque o nome do seu bot e o token dele, pronto! so i
 Lista de Comandos do Bot:</br>
 </br>
 
-#Comandos de Moderação
+# Comandos do Bot
 ```
 Clear
 Bot-off
@@ -44,9 +44,7 @@ remove_ignore
 ignore_list
 cargo-add
 cargo-remove
-```
-#Comandos do Banco
-```
+
 banco-saldo
 banco-transferir
 banco-depositar 
@@ -56,9 +54,7 @@ banco-roubar
 banco-apostar
 banco-top-local 
 loja
-```
-#Comandos Bot
-```
+
 fale
 link
 pvp
@@ -67,3 +63,27 @@ avatar
 video-link
 gay
 ```
+# Comandos de Interação (bnome é o nome que você colocar no bot)
+
+me da adm
+{bnome} você é ´Algo´
+{bnome} Quantas horas?
+{bnome} Que dia é hoje?
+{bnome} você prefere ´Coisa´ ou ´Coisa´
+{bnome} Roube ´User´
+{bnome} Mate o ´User´
+{bnome} geme meu nome
+{bnome} geme
+{bnome}
+bom dia
+boa tarde
+boa noite
+eai
+server ta aberto?
+server parado
+server ruim
+ksksks
+alguém on?
+duvido
+foda-se
+boa {bnome}
