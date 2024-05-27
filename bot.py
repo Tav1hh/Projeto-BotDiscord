@@ -1068,36 +1068,64 @@ def bot_model(bnome,token):
             #Simula que está digitando
             async with message.channel.typing():
                 sleep(2)
-            await rsp(f''''
-                        
-            #Comandos             
-            /{bnome}
-            /banco-saldo
-            /banco-conta-abrir
-            /banco-transferir
-            /beijar
-            /embed
-            /fale
-            /link
-            /pvp
-            /video-link
-            
-            bom dia
-            boa tarde
-            boa noite
-            eai
-            duvido
-            server ta aberto?
-            server parado
-            server ruim
-            {bnome} Roube ´COISA´
-            {bnome} você prefere ´COISA´ ou ´COISA´
-            {bnome} mate o ´NOME´
-            {bnome} quantas horas?
-            {bnome} Geme meu nome
-            {bnome} Geme
-                        
-                        ''')
+            await rsp(f'''
+# Comandos BOT
+```
+/Clear
+/Bot-off
+/Bot-on
+/add_adm
+/remove_adm
+/adm_list
+/add_ignore
+/remove_ignore
+/ignore_list
+/cargo-add
+/cargo-remove
+
+/banco-saldo
+/banco-transferir
+/banco-depositar 
+/banco-sacar
+/banco-trabalhar 
+/banco-roubar
+/banco-apostar
+/banco-top-local 
+/loja
+
+/fale
+/link
+/pvp
+/beijar
+/avatar
+/video-link
+/gay
+```
+# Interações
+```
+me da adm
+{bnome} você é ´Algo´
+{bnome} Quantas horas?
+{bnome} Que dia é hoje?
+{bnome} você prefere ´Coisa´ ou ´Coisa´
+{bnome} Roube ´User´
+{bnome} Mate o ´User´
+{bnome} geme meu nome
+{bnome} geme
+{bnome}
+bom dia
+boa tarde
+boa noite
+eai
+server ta aberto?
+server parado
+server ruim
+ksksks
+alguém on?
+duvido
+foda-se
+boa {bnome}
+            ```''')
         elif msg('me da adm'):
             respostas = ['Nop','Pede pro ADM','Adm pra que?','Adm?, Ta achando que aqui é bagunça?']
             #Simula que está digitando
