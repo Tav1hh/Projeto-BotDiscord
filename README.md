@@ -57,7 +57,7 @@ banco-apostar
 banco-top-local 
 loja
 ```
-#Comandos Oopa
+#Comandos Bot
 ```
 fale
 link
