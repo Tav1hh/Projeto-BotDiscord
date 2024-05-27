@@ -64,7 +64,7 @@ video-link
 gay
 ```
 # Comandos de Interação (bnome é o nome que você colocar no bot)
-
+```
 me da adm
 {bnome} você é ´Algo´
 {bnome} Quantas horas?
@@ -87,3 +87,4 @@ alguém on?
 duvido
 foda-se
 boa {bnome}
+```
