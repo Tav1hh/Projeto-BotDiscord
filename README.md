@@ -25,40 +25,45 @@ server_name varchar(30),
 status varchar(10));
 ```
 </br>
-Após Criar essas duas tabelas configure a conexão com seu banco de dados na linha 30 do arquivo bot.py, </br>
-na ultima linha do bot.py Coloque o nome do seu Bot e o Token dele, Pronto! so iniciar o arquivo agora..</br>
+Após criar essas duas tabelas configure a conexão com seu banco de dados na linha 30 do arquivo bot.py, </br>
+na ultima linha do bot.py coloque o nome do seu bot e o token dele, pronto! so iniciar o arquivo agora..</br>
 </br>
-Lista de Comandos do Bot</br>
+Lista de Comandos do Bot:</br>
+</br>
 
-#Comandos de Moderação </br>
-Clear </br>
-Bot-off </br>
-Bot-on </br>
-add_adm </br>
-remove_adm </br>
-adm_list </br>
-add_ignore </br>
-remove_ignore </br>
-ignore_list </br>
-cargo-add </br>
-cargo-remove </br>
-
-#Comandos do Banco </br>
-banco-saldo </br>
-banco-transferir </br>
-banco-depositar </br>
-banco-sacar </br>
-banco-trabalhar </br>
-banco-roubar </br>
-banco-apostar </br>
-banco-top-local </br>
-loja </br>
-
-#Comandos Oopa </br>
-fale </br>
-link </br>
-pvp </br>
-beijar </br>
-avatar </br>
-video-link </br>
-gay </br>
+#Comandos de Moderação
+```
+Clear
+Bot-off
+Bot-on
+add_adm
+remove_adm
+adm_list
+add_ignore
+remove_ignore
+ignore_list
+cargo-add
+cargo-remove
+```
+#Comandos do Banco
+```
+banco-saldo
+banco-transferir
+banco-depositar 
+banco-sacar
+banco-trabalhar 
+banco-roubar
+banco-apostar
+banco-top-local 
+loja
+```
+#Comandos Oopa
+```
+fale
+link
+pvp
+beijar
+avatar
+video-link
+gay
+```
