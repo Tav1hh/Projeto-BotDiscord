@@ -991,9 +991,7 @@ def bot_model(bnome,token):
         embed.add_field(name='',value=f'📌 use /gay para saber o quanto é o nível gay de uma pessoa! BY:KING', inline=False)
         await ctx.response.send_message(embed=embed,delete_after=40)
         return
-    
-    
-    #Interação com os membros
+    #Interação com os membros   
     @bot.event
     async def on_message(message):
         #Função de Tempo
@@ -1005,6 +1003,8 @@ def bot_model(bnome,token):
 
         #Variaveis Necessárias
         msg = message.content.lower().startswith
+        act_msg = message.content.lower()
+        moji =  message.add_reaction
         rsp = message.channel.send
         try:
             sv = server_config(message.guild.id)
@@ -1032,6 +1032,22 @@ def bot_model(bnome,token):
         alguem_on ='alguém on','alguem on','algm on','alguém vivo','alguem vivo','algm vivo'
         fodase ='fodase','foda-se','foda-se','fds'
         matematica = 'multipli','divid','raiz','soma'
+        def react(m):
+            for i in m:
+                sleep
+                if i in act_msg:
+                    if randint(1,3) == 1:
+                        return True
+        
+        #Reações de Emojis
+        if react(['dinhei']):
+            emojis = ['💸','🤑','💵','💰','🪙']
+            await moji(choice(emojis))
+        elif react(['bw','mine','mush','jogar']):
+            emojis = ['⚒️','⛏️','🗿',]
+            await moji(choice(emojis))    
+        elif 'oopa' and 'reações' in message.content.lower():
+            await moji('😎')
         #Reação ao Bot MC
         if str(message.author.id) == '1236020723861033110':
             sleep(1)
@@ -1062,7 +1078,7 @@ def bot_model(bnome,token):
                     return
         except:
             pass
-        
+                
         #Interação com os membros.
         if msg('ping'):
             #Simula que está digitando
