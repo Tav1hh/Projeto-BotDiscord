@@ -1279,9 +1279,8 @@ def bot_model(bnome,token):
             #Simula que está digitando
             async with message.channel.typing():
                 sleep(2)
-            await rsp(choice(respostas))
-            
-            
+            await rsp(choice(respostas))           
+          
     bot.run(token)
 # bot_model('Nome do BOT','Token Do BOT')
 
