@@ -1046,8 +1046,11 @@ def bot_model(bnome,token):
         elif react(['bw','mine','mush','jogar']):
             emojis = ['⚒️','⛏️','🗿',]
             await moji(choice(emojis))    
-        elif 'oopa' and 'reações' in message.content.lower():
-            await moji('😎')
+        elif 'reações' in message.content.lower():
+            if 'oopa' in message.content.lower():
+                await moji('😎')
+        
+        
         #Reação ao Bot MC
         if str(message.author.id) == '1236020723861033110':
             sleep(1)
