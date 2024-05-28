@@ -1046,9 +1046,10 @@ def bot_model(bnome,token):
         elif react(['bw','mine','mush','jogar']):
             emojis = ['⚒️','⛏️','🗿',]
             await moji(choice(emojis))    
-        elif 'reações' in message.content.lower():
+        elif 'reacoes' in message.content.lower() or 'reações' in message.content.lower() :
             if 'oopa' in message.content.lower():
                 await moji('😎')
+                return
         
         
         #Reação ao Bot MC
