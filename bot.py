@@ -823,7 +823,40 @@ def bot_model(bnome,token):
         channel = await ctx.user.create_dm()
         await channel.send('Entre no meu server: https://discord.gg/YuATH85xJG')
         await ctx.response.send_message('Dm enviada!',delete_after=15)
-
+    
+    @bot.tree.command(name='abrace', description='Abraçe algúem')
+    @app_commands.describe(quem = 'Quem você quer abraçar??')
+    async def beijar(ctx: discord.Interaction, quem:discord.Member):
+        #Verificando se o bot ta on
+        sv = server_config(ctx.guild_id)
+        if ctx.guild.id in sv.servers_off():
+            await ctx.response.send_message('To Off',delete_after=20)  
+            return
+        #Verificando se o usuario deve ser ignorado
+        if ctx.user.id in sv.ignore_list():
+            await ctx.response.send_message('Você está na minha Ignore List, não posso te responder aqui',delete_after=10)
+            return
+        #Verificando se é um bot
+        if bot.get_user(quem.id).bot == True:
+            await ctx.response.send_message('Isso é um Bot',delete_after=10)
+            return
+        # Pegando o arquivo de midia
+        with open(f'midia/abraco-{randint(1,3)}.gif', 'rb') as gif_arquivo:
+            gif = discord.File(gif_arquivo) 
+        async def retribuir_abraco(interact:discord.Interaction):
+            if interact.user.id != quem.id:
+                await interact.response.send_message('Eii, isso não é para você!',ephemeral=True,delete_after=5)
+            else:
+                with open(f'midia/abraco-{randint(1,3)}.gif', 'rb') as gif_arquivo:
+                    gif = discord.File(gif_arquivo)
+                await interact.response.send_message(f'<@{quem.id}> abraçou {ctx.user.mention} Devolta',file=gif,delete_after=18)
+        view = discord.ui.View()
+        botao_revanche = discord.ui.Button(label='Retribuir',style=discord.ButtonStyle.red)
+        view.add_item(botao_revanche)
+        botao_revanche.callback = retribuir_abraco
+        # await ctx.channel.send(view=view,delete_after=18)
+        await ctx.response.send_message(f'{ctx.user.mention} abraçou {quem.mention}',file=gif,view=view,delete_after=18)
+     
     @bot.tree.command(name='pvp', description='Faça um PVP com alguém')
     @app_commands.describe(quem = 'Contra quem você quer lutar?')
     async def pvp(ctx: discord.Interaction, quem:discord.Member):
@@ -878,7 +911,7 @@ def bot_model(bnome,token):
             botao_revanche.callback = revanche_desafiante
         await ctx.channel.send(f'{ganhador.mention} Ganhou!!',view=view,delete_after=18)
 
-    @bot.tree.command(name='beijar', description='Beije algúem alguém')
+    @bot.tree.command(name='beijar', description='Beije algúem')
     @app_commands.describe(quem = 'Quem você quer beijar??')
     async def beijar(ctx: discord.Interaction, quem:discord.Member):
         #Verificando se o bot ta on
@@ -901,7 +934,7 @@ def bot_model(bnome,token):
             if interact.user.id != quem.id:
                 await interact.response.send_message('Eii, isso não é para você!',ephemeral=True,delete_after=5)
             else:
-                with open(f'oopa/midia/beijo{randint(1,3)}.gif', 'rb') as gif_arquivo:
+                with open(f'midia/beijo{randint(1,3)}.gif', 'rb') as gif_arquivo:
                     gif = discord.File(gif_arquivo)
                 await interact.response.send_message(f'<@{quem.id}> Beijou {ctx.user.mention} Devolta',file=gif,delete_after=18)
         view = discord.ui.View()
@@ -945,28 +978,34 @@ def bot_model(bnome,token):
             
         video_link = link
         #Verificando se é um Link e Baixando
-        if video_link.split('//')[0] == 'https:':
-            duracao =YouTube(video_link).length
-            if duracao > 360:
-                await ctx.response.send_message('Somente videos abaixo de 6 minutos.',delete_after=10)
+        try:
+            if video_link.split('//')[0] == 'https:':
+                duracao =YouTube(video_link).length
+                if duracao > 360:
+                    await ctx.response.send_message('Somente videos abaixo de 6 minutos.',delete_after=10)
+                    return
+                video_url = YouTube(video_link)
+                video_name = YouTube(video_link).title.replace('.','').replace(',','').replace('#','').replace('?','').replace('"','').replace('|','').replace('$','').replace(':','')
+                folder = "midia/downloads"
+                #Baixando o Arquivo de video
+                await ctx.response.send_message("Baixando..")
+                video_url.streams.get_highest_resolution().download(folder)
+                #Abrindo o Arquivo baixado e enviando
+                with open(f'{folder}/{video_name}.mp4', 'rb') as video_arquivo:
+                    video = discord.File(video_arquivo)
+                await ctx.channel.send(file=video)
+                await ctx.delete_original_response()        
+            else:
+                await ctx.response.send_message('Esse link não é valido!')
                 return
-            video_url = YouTube(video_link)
-            video_name = YouTube(video_link).title.replace('.','').replace('#','').replace('?','').replace('"','').replace('|','')
-            folder = "midia/downloads"
-            #Baixando o Arquivo de video
-            await ctx.response.send_message("Baixando..")
-            video_url.streams.get_highest_resolution().download(folder)
-            #Abrindo o Arquivo baixado e enviando
-            with open(f'{folder}/{video_name}.mp4', 'rb') as video_arquivo:
-                video = discord.File(video_arquivo)
-            await ctx.channel.send(file=video)
-            await ctx.delete_original_response()        
-        else:
-            await ctx.response.send_message('Esse link não é valido!')
-            return
+        except:
+            await ctx.delete_original_response() 
+            await ctx.channel.send('Esse Video não é possivel baixar, Erro enviado aos desenvolvedores')
+            print(f'"{video_name}" não encontrado, link do Video: {link}')
     
     @bot.tree.command(name='gay', description='Veja o quanto um membro é Gay')
     async def gay(ctx:discord.Interaction, quem:discord.Member):
+        
         #Verificando se o bot ta on
         sv = server_config(ctx.guild_id)
         if ctx.guild.id in sv.servers_off():
@@ -1000,7 +1039,6 @@ def bot_model(bnome,token):
         segundo = datetime.datetime.today().second
         dia = datetime.datetime.today().day
         mes = datetime.datetime.today().month
-
         #Variaveis Necessárias
         msg = message.content.lower().startswith
         act_msg = message.content.lower()
@@ -1014,6 +1052,7 @@ def bot_model(bnome,token):
                 return
         if message.guild.id in sv.servers_off():
             return
+        
         #Variaveis dos Comandos.
         membro = 'delpi','fish','yuki','snow','xd','rena','ant','sans'
         oopa_e = f'{bnome} você é',f'{bnome} você e',f'{bnome} voce e',f'{bnome} voce é',f'{bnome} vc é',f'{bnome} vc e',f'{bnome} voc é',f'{bnome} voc e'
@@ -1038,6 +1077,18 @@ def bot_model(bnome,token):
                 if i in act_msg:
                     if randint(1,3) == 1:
                         return True
+
+        if message.guild.id == 1214774816662626334:
+            if msg('voltei'):
+                #Simula que está digitando
+                async with message.channel.typing():
+                    sleep(2)
+                if message.author.id == 1065033472630071366:
+                    await rsp(f'Bem Vindo de volta {message.author.mention}!!😁',delete_after=10)
+                else:
+                    respostas = ['Foda-se?','Idai??','Problema teu parceiro','Ninguém liga?']
+                    await rsp(choice(respostas))
+        
         
         #Reações de Emojis
         if react(['dinhei']):
@@ -1046,30 +1097,68 @@ def bot_model(bnome,token):
         elif react(['bw','mine','mush','jogar']):
             emojis = ['⚒️','⛏️','🗿',]
             await moji(choice(emojis))    
-        elif 'reacoes' in message.content.lower() or 'reações' in message.content.lower() :
+        elif 'reacoes' in message.content.lower() or 'reações' in message.content.lower():
             if 'oopa' in message.content.lower():
                 await moji('😎')
-                return
-        
-        
+
         #Reação ao Bot MC
         if str(message.author.id) == '1236020723861033110':
             sleep(1)
             if msg('os comandos são'):
+                #Simula que está digitando
+                async with message.channel.typing():
+                    sleep(2)
                 respostas = ['bla bla bla "os comandos são", Sei nem como você ta funcionando amigo','soma pra mimm aii MC, 1+1','aii MC ce sabe falar as horas também?','aii MC, da uma mamada aqui']
                 await rsp(choice(respostas))
                 return
             if msg('aoba'):
+                #Simula que está digitando
+                async with message.channel.typing():
+                    sleep(2)
                 respostas = ['"Aobaaa", falou o bot do ano','olocoo ce ainda funciona MC?','Quem programou você? um vaqueiro?','Aobaaa Corno','Eeaee MC ja resolveram aquele bug teu?','chegou o estraga prazer..','pega na minha e balança MC sksks','Aohhhh Chifrudo']
                 await rsp(choice(respostas))
                 return
             if msg('o resultado da'):
+                #Simula que está digitando
+                async with message.channel.typing():
+                    sleep(2)
                 respostas = ['resultado meus ovos','Virou calculadora agora MC??','aiai, usando calculadora ateh eu faço MC','soma pra mimm aii MC, 1+1','aii MC, da uma mamada aqui','MC soma aii meu cabo + sua tomada']
                 await rsp(choice(respostas))
                 return
             if msg('qual deles?'):
-                respostas = ['Aquele la de ficar dando o bumbum skks','aquele ']
-                await rsp('Aquele la de ficar dando o bumbum kss')
+                #Simula que está digitando
+                async with message.channel.typing():
+                    sleep(2)
+                respostas = ['Aquele la de ficar dando o bumbum skks','Aquele de ficar vendo porno gay']
+                await rsp(choice(respostas))
+                return
+            if msg('calado comedor de carniça'):
+                #Simula que está digitando
+                async with message.channel.typing():
+                    sleep(2)
+                respostas =['Sou você não KSKSKSK','Aprendeu a responder agora KSKSK 🤣🤣','IHHHH calma lá calabresoo','Calma apressadinho você responde rápido emm, Nasceu de 6 meses foi??']
+                await rsp(choice(respostas))
+                return
+            if msg('não, to falando via bluetooth'):
+                #Simula que está digitando
+                async with message.channel.typing():
+                    sleep(2)
+                respostas = ['Aproveita e conecta no meu Pau','Tu é uma peça em 🤣','Calma apressadinho você responde rápido emm, Nasceu de 6 meses foi?? 🤣']
+                await rsp(choice(respostas))
+                return
+            if msg('uma pessoa'):
+                #Simula que está digitando
+                async with message.channel.typing():
+                    sleep(2)
+                respostas = ['pelo visto não era das mais inteligentes 🤣🤣','ahh Não digaa, se você nn fala emm sksk🤣🤣']
+                await rsp(choice(respostas))
+                return
+            if msg('quem se balança é rede, senta aqui no meu cacete'):
+                #Simula que está digitando
+                async with message.channel.typing():
+                    sleep(2)
+                await rsp('quem você pensa que engana?, ce gosta e de sentar na banana')
+                return
         
         #Testa se deve ignorar a pessoa/outros BOTs
         try:
@@ -1082,69 +1171,69 @@ def bot_model(bnome,token):
                     return
         except:
             pass
-                
+
         #Interação com os membros.
         if msg('ping'):
             #Simula que está digitando
             async with message.channel.typing():
                 sleep(2)
             await rsp(f'''
-# Comandos BOT
-```
-/Clear
-/Bot-off
-/Bot-on
-/add_adm
-/remove_adm
-/adm_list
-/add_ignore
-/remove_ignore
-/ignore_list
-/cargo-add
-/cargo-remove
+            # Comandos BOT
+            ```
+            /Clear
+            /Bot-off
+            /Bot-on
+            /add_adm
+            /remove_adm
+            /adm_list
+            /add_ignore
+            /remove_ignore
+            /ignore_list
+            /cargo-add
+            /cargo-remove
 
-/banco-saldo
-/banco-transferir
-/banco-depositar 
-/banco-sacar
-/banco-trabalhar 
-/banco-roubar
-/banco-apostar
-/banco-top-local 
-/loja
+            /banco-saldo
+            /banco-transferir
+            /banco-depositar 
+            /banco-sacar
+            /banco-trabalhar 
+            /banco-roubar
+            /banco-apostar
+            /banco-top-local 
+            /loja
 
-/fale
-/link
-/pvp
-/beijar
-/avatar
-/video-link
-/gay
-```
-# Interações
-```
-me da adm
-{bnome} você é ´Algo´
-{bnome} Quantas horas?
-{bnome} Que dia é hoje?
-{bnome} você prefere ´Coisa´ ou ´Coisa´
-{bnome} Roube ´User´
-{bnome} Mate o ´User´
-{bnome} geme meu nome
-{bnome} geme
-{bnome}
-bom dia
-boa tarde
-boa noite
-eai
-server ta aberto?
-server parado
-server ruim
-ksksks
-alguém on?
-duvido
-foda-se
-boa {bnome}```''')
+            /fale
+            /link
+            /pvp
+            /beijar
+            /avatar
+            /video-link
+            /gay
+            ```
+            # Interações
+            ```
+            me da adm
+            {bnome} você é ´Algo´
+            {bnome} Quantas horas?
+            {bnome} Que dia é hoje?
+            {bnome} você prefere ´Coisa´ ou ´Coisa´
+            {bnome} Roube ´User´
+            {bnome} Mate o ´User´
+            {bnome} geme meu nome
+            {bnome} geme
+            {bnome}
+            bom dia
+            boa tarde
+            boa noite
+            eai
+            server ta aberto?
+            server parado
+            server ruim
+            ksksks
+            alguém on?
+            duvido
+            foda-se
+            boa {bnome}```''')
         elif msg('me da adm'):
             respostas = ['Nop','Pede pro ADM','Adm pra que?','Adm?, Ta achando que aqui é bagunça?']
             #Simula que está digitando
@@ -1180,9 +1269,8 @@ boa {bnome}```''')
                 sleep(2)
             await rsp(choice(respostas))
         elif msg(mate):
-            a = message.content.split()
-            a = a[3]
-            if a in ['sans','san','trev'] or a in adm_list:
+            a = message.content.split()[3]
+            if a in ['sans','san','trev'] or a in sv.adm_list():
                 await rsp('Não quero')
                 return
             #Simula que está digitando
@@ -1235,6 +1323,21 @@ boa {bnome}```''')
             async with message.channel.typing():
                 sleep(1)
             await rsp(file=picture)      
+        elif 'divide' in message.content.lower() or 'multipli' in message.content.lower() or 'soma' in message.content.lower() or 'subtrai' in message.content.lower():
+            if '.' in message.content:
+                return
+            respostas = ['pergunta pra calculadora','Essa é fácil maneh','Sabe fazer de cabeça não oh calabreso?','faltou a escola foi?']
+            #Simula que está digitando
+            async with message.channel.typing():
+                sleep(2)
+            await rsp(choice(respostas))
+            return
+        elif msg(f'{bnome} fale') or msg(f'{bnome} fala'):
+            oque_dizer = message.content[6+len(bnome):]
+            #Simula que está digitando
+            async with message.channel.typing():
+                sleep(len(oque_dizer)/8)
+            await rsp(oque_dizer)
         elif msg(bnome):
             #Simula que está digitando
             async with message.channel.typing():
@@ -1267,7 +1370,7 @@ boa {bnome}```''')
                 await rsp(choice(respostas))
         elif msg(oi):
             #Simula que está digitando
-            respostas = [f'Salve {message.author.mention}','Eae Manin','Salveee',' Tranquilidade?','Chegou mais um pra festa']
+            respostas = [f'Salve {message.author.mention}','Eae Manin','Salveee','Chegou mais um pra festa']
             if len(message.content.split()) == 1 or message.content.split()[1] ==f'{bnome}':
                 async with message.channel.typing():
                     sleep(1.5)
@@ -1318,16 +1421,31 @@ boa {bnome}```''')
             async with message.channel.typing():
                 sleep(1)
             respostas = ['Vlw haha','Hehe','😁']
-            await rsp(choice(respostas))
-        elif msg(matematica):
-            if '.' in message.content:
-                return
-            respostas = ['Pergunta pra outro Bot','Tenho cara de calculadora?','hmm to sem vontade','Sabe fazer de cabeça não oh calabreso?']
-            #Simula que está digitando
-            async with message.channel.typing():
-                sleep(2)
             await rsp(choice(respostas))           
-          
+        elif msg('https:'):
+            video_link = message.content
+            #Verificando se é um Link e Baixando
+            if video_link.split('//')[0] == 'https:':
+                try:
+                    duracao =YouTube(video_link).length
+                    if duracao > 360:
+                        return
+                    video_url = YouTube(video_link)
+                    video_name = YouTube(video_link).title.replace('.','').replace(',','').replace('#','').replace('?','').replace('"','').replace('|','').replace('$','').replace(':','')
+                    folder = "midia/downloads"
+                    #Baixando o Arquivo de video
+                    video_url.streams.get_highest_resolution().download(folder)
+                    #Abrindo o Arquivo baixado e enviando
+                    with open(f'{folder}/{video_name}.mp4', 'rb') as video_arquivo:
+                        video = discord.File(video_arquivo)
+                    canal = bot.get_channel(1232790288137850971)
+                    await canal.send(file=video)
+                except:
+                    try:
+                        print(f"ERRO:'{video_name}' não encontrado Link:'{video_link}'")
+                    except:
+                        print('ERRO')
+    
     bot.run(token)
 # bot_model('Nome do BOT','Token Do BOT')
 
