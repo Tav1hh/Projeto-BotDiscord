@@ -1447,6 +1447,6 @@ def bot_model(bnome,token):
                         print('ERRO')
     
     bot.run(token)
-#Coloque aqui o nome do Bot e o token dele,
+    
 # bot_model('Nome do BOT','Token Do BOT')
 
