@@ -985,7 +985,9 @@ def bot_model(bnome,token):
                     await ctx.response.send_message('Somente videos abaixo de 6 minutos.',delete_after=10)
                     return
                 video_url = YouTube(video_link)
-                video_name = YouTube(video_link).title.replace('.','').replace(',','').replace('#','').replace('?','').replace('"','').replace('|','').replace('$','').replace(':','')
+                # video_name = YouTube(video_link).title.replace('.','').replace(',','').replace('#','').replace('?','').replace('"','').replace('|','').replace('$','').replace(':','')
+                tabela = str.maketrans('', '', '.,#?\"|$:')
+                video_name = YouTube(video_link).title.translate(tabela)
                 folder = "midia/downloads"
                 #Baixando o Arquivo de video
                 await ctx.response.send_message("Baixando..")
