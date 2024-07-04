@@ -30,10 +30,10 @@ def bot_model(bnome,token):
     db = db()
     #Coneção com banco de dados
     mydb = mysql.connector.connect(
-    host="db.host",
-    user="db.user",
-    password="db.password",
-    database="db.db")
+    host= f"{db.host}",
+    user= f"{db.user}",
+    password= f"{db.password}",
+    database=f"{db.db}")
     mycursor = mydb.cursor()
     
     class server_config:
