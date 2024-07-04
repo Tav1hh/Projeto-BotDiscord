@@ -1,5 +1,6 @@
 def bot_model(bnome,token):
     #Importação de pacotes
+    from app import db
     from discord.voice_client import VoiceClient
     from discord import app_commands
     from discord.ext import commands
@@ -26,13 +27,13 @@ def bot_model(bnome,token):
             print(f'Sincronizados {len(synced)} commandos')
         except Exception as e:
             print(e)
-    
+    db = db()
     #Coneção com banco de dados
     mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="P@cienc1a",
-    database="oopa")
+    host="db.host",
+    user="db.user",
+    password="db.password",
+    database="db.db")
     mycursor = mydb.cursor()
     
     class server_config:
