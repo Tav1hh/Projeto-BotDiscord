@@ -1434,7 +1434,9 @@ def bot_model(bnome,token):
                     if duracao > 360:
                         return
                     video_url = YouTube(video_link)
-                    video_name = YouTube(video_link).title.replace('.','').replace(',','').replace('#','').replace('?','').replace('"','').replace('|','').replace('$','').replace(':','')
+                    tabela = str.maketrans('', '', '.,#?\"|$:')
+                    video_name = YouTube(video_link).title.translate(tabela)
+                    # video_name = YouTube(video_link).title.replace('.','').replace(',','').replace('#','').replace('?','').replace('"','').replace('|','').replace('$','').replace(':','')
                     folder = "midia/downloads"
                     #Baixando o Arquivo de video
                     video_url.streams.get_highest_resolution().download(folder)
