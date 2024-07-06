@@ -1,6 +1,5 @@
 def bot_model(bnome,token):
     #Importação de pacotes
-    from app import db
     from discord.voice_client import VoiceClient
     from discord import app_commands
     from discord.ext import commands
@@ -30,10 +29,10 @@ def bot_model(bnome,token):
     db = db()
     #Coneção com banco de dados
     mydb = mysql.connector.connect(
-    host= f"{db.host}",
-    user= f"{db.user}",
-    password= f"{db.password}",
-    database=f"{db.db}")
+    host= "host",
+    user= "user",
+    password= "password",
+    database="db")
     mycursor = mydb.cursor()
     
     class server_config:
@@ -1452,6 +1451,7 @@ def bot_model(bnome,token):
                         print('ERRO')
     
     bot.run(token)
-    
-# bot_model('Nome do BOT','Token Do BOT')
+
+#Coloque aqui o nome do bot e o token
+bot_model('Nome do BOT','Token Do BOT')
 
