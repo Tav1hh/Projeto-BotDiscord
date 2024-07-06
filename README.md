@@ -1,3 +1,5 @@
+para adicionar o meu BOT:https://discord.com/oauth2/authorize?client_id=1223830829529038972
+
 Para o Bot Funcionar perfeitamente você precisa criar 2 tabelas no seu Banco de dados
 
 tabela Banco:
