@@ -26,7 +26,6 @@ def bot_model(bnome,token):
             print(f'Sincronizados {len(synced)} commandos')
         except Exception as e:
             print(e)
-    db = db()
     #Coneção com banco de dados
     mydb = mysql.connector.connect(
     host= "host",
