@@ -1450,5 +1450,6 @@ def bot_model(bnome,token):
                         print('ERRO')
     
     bot.run(token)
-bot_model('Nome', 'Token)
+
+bot_model('Nome', 'Token')
 
