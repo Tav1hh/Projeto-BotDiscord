@@ -31,7 +31,7 @@ def bot_model(bnome,token):
     host= "host",
     user= "user",
     password= "password",
-    database="db")
+    database= "database")
     mycursor = mydb.cursor()
     
     class server_config:
@@ -822,7 +822,7 @@ def bot_model(bnome,token):
         channel = await ctx.user.create_dm()
         await channel.send('Entre no meu server: https://discord.gg/YuATH85xJG')
         await ctx.response.send_message('Dm enviada!',delete_after=15)
-    
+
     @bot.tree.command(name='abrace', description='Abraçe algúem')
     @app_commands.describe(quem = 'Quem você quer abraçar??')
     async def beijar(ctx: discord.Interaction, quem:discord.Member):
@@ -1339,7 +1339,7 @@ def bot_model(bnome,token):
             async with message.channel.typing():
                 sleep(len(oque_dizer)/8)
             await rsp(oque_dizer)
-        elif msg(bnome):
+        elif msg(bnome) or msg(f'<@{bot.user.id}>'):
             #Simula que está digitando
             async with message.channel.typing():
                 sleep(1.5)
@@ -1450,7 +1450,5 @@ def bot_model(bnome,token):
                         print('ERRO')
     
     bot.run(token)
-
-#Coloque aqui o nome do bot e o token
-bot_model('Nome do BOT','Token Do BOT')
+bot_model('Nome', 'Token)
 
