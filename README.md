@@ -1,4 +1,4 @@
-para adicionar o meu BOT:http://195.200.1.248:19995/
+para adicionar o meu BOT:https://tav1hh.github.io/Site-BotDiscord/
 
 Para o Bot Funcionar perfeitamente você precisa criar 2 tabelas no seu Banco de dados
 
